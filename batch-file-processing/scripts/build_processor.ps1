@@ -1,7 +1,7 @@
 Write-Host "Building and pushing batch-processor image to ACR"
 
-$acrLoginServer = "<acr-login-server>"
-$acrName = "<acr-name>"
+$acrLoginServer = "dapr1batch.azurecr.io"
+$acrName = "dapr1batch"
 
 # Log in to the registry
 az acr login --name $acrName

@@ -1,5 +1,5 @@
 {
-    "storageAccountName": "<storage-account-name>",
-    "resourceGroupName": "<resource-group-name>",
-    "subscriptionId": "<subscription-id>"
+    "storageAccountName": "dapr1batch",
+    "resourceGroupName": "dapr-eks-rg",
+    "subscriptionId": "0005c093-d9ad-44b4-abe8-f507848419ca"
 }

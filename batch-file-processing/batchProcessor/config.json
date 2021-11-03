@@ -1,4 +1,4 @@
 {
-  "blobStorageAccountBaseUrl": "<container_base_url>",
-  "storageSasToken": "?<storage_sas_token>"
+  "blobStorageAccountBaseUrl": "https://dapr1batch.blob.core.windows.net/orders/",
+  "storageSasToken": "?sp=r&st=2021-11-03T17:47:35Z&se=2021-11-04T01:47:35Z&spr=https&sv=2020-08-04&sr=c&sig=I9UmSb144MT3rgpdRupORTIXxvWkKImdtrwKp4IUqBk%3D"
 }

@@ -1,0 +1,31 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: eventgrid-binding
+spec:
+  type: bindings.azure.eventgrid
+  version: v1
+  metadata:
+  # Required Input Binding Metadata
+  - name: tenantId
+    value: "72f988bf-86f1-41af-91ab-2d7cd011db47"
+  - name: subscriptionId
+    value: "0005c093-d9ad-44b4-abe8-f507848419c"
+  - name: clientId
+    value: "fb669e00-bdc6-487b-bbce-f5940c03318b"
+  - name: clientSecret
+    value: "sSk7Q~WdafbqKG7demdD-7i9WiRsyRU5vjEfs"
+  - name: subscriberEndpoint
+    value: "https://nginx-daprbatch.westus2.cloudapp.azure.com/api"
+  - name: handshakePort
+    value: "3000"
+  - name: scope
+    value: "/subscriptions/0005c093-d9ad-44b4-abe8-f507848419ca/resourceGroups/dapr-eks-rg/providers/Microsoft.Storage/storageaccounts/dapr1batch"
+  # Optional Input Binding Metadata
+  - name: eventSubscriptionName
+    value: "blob-created"
+  # Required Output Binding Metadata
+  # - name: accessKey
+  #   value: "[AccessKey]"
+  # - name: topicEndpoint
+  #   value: "[TopicEndpoint]

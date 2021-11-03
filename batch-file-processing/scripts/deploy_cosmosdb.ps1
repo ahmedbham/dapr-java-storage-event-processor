@@ -1,5 +1,5 @@
-$resourceGroupName = "<resource-group-name>"
-$dbAccountName = "<db-account-name>"
+$resourceGroupName = "dapr-eks-rg"
+$dbAccountName = "dapr-batch-cdb"
 $dbName = "IcecreamDB"
 $containerName = "Orders"
 

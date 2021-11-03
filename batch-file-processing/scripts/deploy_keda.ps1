@@ -1,5 +1,5 @@
-$resourceGroupName = "<resource-group-name>"
-$namespaceName = "<service-bus-namespace-name>"
+$resourceGroupName = "dapr-eks-rg"
+$namespaceName = "service-bus-namespace-dapr"
 
 # Deploy KEDA
 helm repo add kedacore https://kedacore.github.io/charts

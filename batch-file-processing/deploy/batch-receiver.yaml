@@ -1,3 +1,26 @@
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: batch-receiver-service
+  labels:
+    app: batch-receiver
+spec:
+  selector:
+    app: batch-receiver
+  ports:
+    # - name: webapi
+    #   protocol: TCP
+    #   port: 80
+    #   targetPort: 80
+    - name: batch-receiver
+      protocol: TCP
+      port: 80
+      targetPort: 3500
+  type: ClusterIP
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,14 +38,15 @@ spec:
         app: batch-receiver
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/id: "batch-receiver"
-        dapr.io/port: "3000"
+        dapr.io/app-id: "batch-receiver"
+        dapr.io/app-port: "3000"
         dapr.io/log-level: "debug"
         dapr.io/config: "tracing"
+        dapr.io/sidecar-listen-addresses: "0.0.0.0"
     spec:
       containers:
       - name: batch-receiver
-        image: <registryLoginServer>/batch-receiver:v1
+        image: dapr1batch.azurecr.io/batch-receiver:v1
         ports:
         - containerPort: 3000
         imagePullPolicy: Always

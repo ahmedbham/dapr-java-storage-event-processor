@@ -1,6 +1,6 @@
-$resourceGroupName = "<resource-group-name>"
-$namespaceName = "<service-bus-namespace-name>"
-$location = "<location>"
+$resourceGroupName = "dapr-eks-rg"
+$namespaceName = "service-bus-namespace-dapr"
+$location = "westus2"
 
 az servicebus namespace create `
     --name $namespaceName `

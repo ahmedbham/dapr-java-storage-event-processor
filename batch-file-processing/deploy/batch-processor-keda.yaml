@@ -4,7 +4,7 @@ metadata:
   name: batch-processor
   namespace: default
 data:
-  SERVICE_BUS: <your-base64-encoded-connection-string>
+  SERVICE_BUS: RW5kcG9pbnQ9c2I6Ly9zZXJ2aWNlLWJ1cy1uYW1lc3BhY2UtZGFwci5zZXJ2aWNlYnVzLndpbmRvd3MubmV0LztTaGFyZWRBY2Nlc3NLZXlOYW1lPWtlZGFydWxlO1NoYXJlZEFjY2Vzc0tleT05TXc0RmtHbENkRnJRR1JyaElhL2FVbDdaVnBFTkVPbGpSaGUzVUF2dnpvPTtFbnRpdHlQYXRoPWJhdGNocmVjZWl2ZWQ=
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -23,31 +23,31 @@ spec:
         app: batch-processor
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/id: "batch-processor"
-        dapr.io/port: "3000"
+        dapr.io/app-id: "batch-processor"
+        dapr.io/app-port: "3100"
         dapr.io/log-level: "debug"
         dapr.io/config: "tracing"
     spec:
       containers:
       - name: batch-processor
-        image: <registryLoginServer>/batch-processor:v1
+        image: dapr1batch.azurecr.io/batch-processor:v1
         ports:
-        - containerPort: 3000
+        - containerPort: 3100
         imagePullPolicy: Always
         envFrom:
         - secretRef:
             name: batch-processor
 ---
-apiVersion: keda.k8s.io/v1alpha1
+apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
   name: batch-processor-scaler
-  namespace: default
+  namespace: keda
   labels:
     deploymentName: batch-processor
 spec:
   scaleTargetRef:
-    deploymentName: batch-processor
+    name: batch-processor
   minReplicaCount: 1 # Change to define how many minimum replicas you want
   cooldownPeriod:  60
   # maxReplicaCount: 5

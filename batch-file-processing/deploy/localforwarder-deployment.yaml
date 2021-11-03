@@ -43,7 +43,7 @@ spec:
             cpu: 0.1
         env:
           - name: APPINSIGHTS_INSTRUMENTATIONKEY
-            value: "<appinsights_instrumentationkey>"
+            value: "dde01a69-6e32-4210-ac6e-5c440220647c"
         ports:
         - containerPort: 55678
         imagePullPolicy: Always

@@ -480,6 +480,8 @@ References:
 1. Create an Azure Container Registry (ACR) (Lowercase registry name is recommended to avoid warnings):
 
     ```powershell
+    
+    
     az acr create --resource-group <resource-group-name> --name <acr-name> --sku Basic
     ```
 

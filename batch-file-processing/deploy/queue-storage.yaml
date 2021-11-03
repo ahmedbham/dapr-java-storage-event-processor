@@ -1,15 +1,19 @@
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: blob-storage
-  namespace: default
+  name: <NAME>
+  namespace: <NAMESPACE>
 spec:
-  type: bindings.azure.blobstorage
+  type: bindings.azure.storagequeues
   version: v1
   metadata:
   - name: storageAccount
-    value: dapr1batch
+    value: "dapr1batch"
   - name: storageAccessKey
     value: "7c2I9pgSRYaPii2n9TuEnNVXl8Bs8o7uW/HM/BmVDmDYgjgrFp47IyzPrv/naJomXebHQeHtgAxYpL/VLoI9Rw=="
-  - name: container
-    value: orders
+  - name: queue
+    value: "dapr-batch-queue"
+  - name: ttlInSeconds
+    value: "60"
+  - name: decodeBase64
+    value: "false"

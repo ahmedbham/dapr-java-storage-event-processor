@@ -15,14 +15,14 @@ spec:
         app: batch-generator
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/id: "batch-generator"
-        dapr.io/port: "3003"
+        dapr.io/app-id: "batch-generator"
+        dapr.io/app-port: "3003"
         dapr.io/log-level: "debug"
         dapr.io/config: "tracing"
     spec:
       containers:
       - name: batch-generator
-        image: <registryLoginServer>/batch-generator:v1
+        image: dapr1batch.azurecr.io/batch-generator:v1
         ports:
         - containerPort: 3003
         imagePullPolicy: Always
