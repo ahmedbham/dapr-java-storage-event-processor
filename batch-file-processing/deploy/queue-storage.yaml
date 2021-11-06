@@ -1,8 +1,8 @@
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: <NAME>
-  namespace: <NAMESPACE>
+  name: batchqueue
+  # namespace: <NAMESPACE>
 spec:
   type: bindings.azure.storagequeues
   version: v1
@@ -16,4 +16,4 @@ spec:
   - name: ttlInSeconds
     value: "60"
   - name: decodeBase64
-    value: "false"
+    value: "true"
