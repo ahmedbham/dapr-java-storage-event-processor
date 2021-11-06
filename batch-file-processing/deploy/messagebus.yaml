@@ -7,7 +7,7 @@ spec:
   version: v1
   metadata:
   - name: connectionString
-    value: "Endpoint=sb://service-bus-namespace-dapr.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=x0HJgf5enslQZnZ+2KBDoGvBhsaa584Ca+oRR0AKnoc=" # Required.
+    value: "Endpoint=sb://service-bus-namespace-dapr.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=xxx" # Required.
   - name: maxActiveMessages
     value: "1"
   - name: lockRenewalInSec
