@@ -10,7 +10,7 @@ spec:
   - name: storageAccount
     value: "dapr1batch"
   - name: storageAccessKey
-    value: "7c2I9pgSRYaPii2n9TuEnNVXl8Bs8o7uW/HM/BmVDmDYgjgrFp47IyzPrv/naJomXebHQeHtgAxYpL/VLoI9Rw=="
+    value: "xxx"
   - name: queue
     value: "dapr-batch-queue"
   - name: ttlInSeconds
