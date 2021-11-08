@@ -100,7 +100,7 @@ helm install dapr-kafka bitnami/kafka --wait --namespace kafka -f batch-file-pro
     kubectl apply -f batch-file-processing/deploy/kafka-pubsub.yaml
     ```
 
-2. Deploy Batch Receiver microservice:
+2. Deploy Java Batch Receiver microservice:
 
     ```bash
     cd batch-file-processing/javabatchreceiver/batch-receiver
@@ -108,7 +108,7 @@ helm install dapr-kafka bitnami/kafka --wait --namespace kafka -f batch-file-pro
     cd ../../../
     ```
 
-    Check the logs for batch-receiver.
+    Check the logs for java-batch-receiver.
     ```bash 
     javabatchreceivername=$(kubectl get po --selector=app=java-batch-receiver -o jsonpath='{.items[*].metadata.name}')
     kubectl logs $javabatchreceivername -c java-batch-receiver -f

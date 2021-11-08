@@ -1,5 +1,5 @@
 echo "mvn install java-batch-receiver"
-./mvnw clean install -DskipTests
+./mvnw clean install
 
 echo "Pushing java-batch-receiver image to ACR"
 
@@ -10,7 +10,7 @@ acrName="dapr1batch"
 az acr login --name $acrName
 
 # Build an image 
-./mvnw spring-boot:build-image -DskipTests
+./mvnw spring-boot:build-image
 
 # Tag the image
 docker tag batch-receiver:0.0.1-SNAPSHOT $acrLoginServer/java-batch-receiver:v1
