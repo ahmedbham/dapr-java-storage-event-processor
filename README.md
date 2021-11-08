@@ -5,6 +5,7 @@
 * Azure CLI
 * Helm3
 * Java JDK11
+* Maven
 
 
 ## Set up Cluster
