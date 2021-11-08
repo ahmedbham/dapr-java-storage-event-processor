@@ -1,26 +1,3 @@
-
-# kind: Service
-# apiVersion: v1
-# metadata:
-#   name: java-batch-receiver-service
-#   labels:
-#     app: java-batch-receiver
-# spec:
-#   selector:
-#     app: java-batch-receiver
-#   ports:
-#     # - name: webapi
-#     #   protocol: TCP
-#     #   port: 80
-#     #   targetPort: 80
-#     - name: java-batch-receiver
-#       protocol: TCP
-#       port: 8080
-#       targetPort: 8084
-#   type: ClusterIP
-
-# ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -42,7 +19,6 @@ spec:
         dapr.io/app-port: "8084"
         dapr.io/log-level: "debug"
         dapr.io/config: "tracing"
-        # dapr.io/sidecar-listen-addresses: "0.0.0.0"
     spec:
       containers:
       - name: java-batch-receiver

@@ -10,6 +10,8 @@ spec:
   - name: storageAccount
     value: dapr1batch
   - name: storageAccessKey
-    value: "7c2I9pgSRYaPii2n9TuEnNVXl8Bs8o7uW/HM/BmVDmDYgjgrFp47IyzPrv/naJomXebHQeHtgAxYpL/VLoI9Rw=="
+    secretKeyRef:
+      name: blob-storage-secret
+      key: connectionString
   - name: container
     value: orders
