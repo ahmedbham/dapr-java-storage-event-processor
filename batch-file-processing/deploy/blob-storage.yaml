@@ -10,8 +10,8 @@ spec:
   - name: storageAccount
     value: dapr1batch
   - name: storageAccessKey
-<<<<<<< HEAD
-    value: "xxx"
->>>>>>> 673d625bff4ffe6a0f771cee9d8c3b77f67b0a71
+    secretKeyRef:
+          name: output-queue-secret
+          key: connectionString
   - name: container
     value: orders

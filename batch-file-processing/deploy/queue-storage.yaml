@@ -10,7 +10,9 @@ spec:
   - name: storageAccount
     value: "dapr1batch"
   - name: storageAccessKey
-    value: "xxx"
+    secretKeyRef:
+      name: output-queue-secret
+      key: connectionString
   - name: queue
     value: "dapr-batch-queue"
   - name: ttlInSeconds
