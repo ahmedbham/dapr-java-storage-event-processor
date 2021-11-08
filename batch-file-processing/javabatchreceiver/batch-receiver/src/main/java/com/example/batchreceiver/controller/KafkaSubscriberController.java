@@ -25,6 +25,7 @@ public class KafkaSubscriberController {
         System.out.println("kafka message received: " + url);
 
         client.invokeBinding(BINDING_NAME, BINDING_OPERATION, url).block();
+        client.close();
 
       } catch (Exception e) {
         throw new RuntimeException(e);

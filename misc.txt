@@ -2,9 +2,15 @@ kubectl get pods
 
 kubectl get all -n dapr-system
 
-kubectl delete -f java-batch-receiver.yaml
+kubectl delete -f batch-file-processing/deploy/java-batch-receiver.yaml
 
-kubectl apply -f java-batch-receiver.yaml
+kubectl apply -f batch-file-processing/deploy/java-batch-receiver.yaml
+
+cd batch-file-processing/javabatchreceiver/batch-receiver
+./java-batch-receiver.sh
+cd ../../../
+
+
 
 javabatchreceivername=$(kubectl get po --selector=app=java-batch-receiver -o jsonpath='{.items[*].metadata.name}')
 
@@ -22,4 +28,12 @@ az storage blob delete-batch --account-key ZSDksB
 secretKeyRef:
       name: output-queue-secret
       key: connectionString
+
+
+kubectl apply -f batch-file-processing/deploy/blob-storage.yaml   
+
+kubectl apply -f batch-file-processing/deploy/queue-storage.yaml 
+
+kubectl apply -f batch-file-processing/deploy/output-queue.yaml 
+
 

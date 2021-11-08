@@ -20,9 +20,16 @@ public class PublishToJava {
   private static final String PUBSUB_NAME = "messagebus";
 
   public void produce(String message) {
-    DaprClient client = new DaprClientBuilder().build();
-    client.publishEvent(PUBSUB_NAME, TOPIC_NAME, message, singletonMap(Metadata.TTL_IN_SECONDS, MESSAGE_TTL_IN_SECONDS))
-        .block();
+    try {
+      DaprClient client = new DaprClientBuilder().build();
+      client
+          .publishEvent(PUBSUB_NAME, TOPIC_NAME, message, singletonMap(Metadata.TTL_IN_SECONDS, MESSAGE_TTL_IN_SECONDS))
+          .block();
+
+      client.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     System.out.println("Published message: " + message);
   }
 
