@@ -19,3 +19,7 @@ kubectl logs $batchgeneratorname -c daprd -f
 
 az storage blob delete-batch --account-key ZSDksB
 
+secretKeyRef:
+      name: output-queue-secret
+      key: connectionString
+

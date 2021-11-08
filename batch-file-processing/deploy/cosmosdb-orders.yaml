@@ -9,7 +9,7 @@ spec:
   - name: url
     value: https://dapr-batch-cdb.documents.azure.com:443
   - name: masterKey
-    value: sUaNI6YeTSeGXZD0M2IiIY7ILA8qv8Fp3SOtGih0hS80uwAjyDtwmkOfvxrJokjyhHIl6cbsGmUcCeDqDnSjEw==
+    value: xxx
   - name: database
     value: IcecreamDB
   - name: collection
