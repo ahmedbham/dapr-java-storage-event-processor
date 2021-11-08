@@ -54,9 +54,10 @@ References:
         d. Endpoint Type: "Storage Queues"
         e. Endpoint: <select 'dapr-batch-queue' you had previously created>
 
+
 References:
 
-* [Create a container in Azure Storage - Portal](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
+* [Use Azure Event Grid to route Blob storage events to web endpoint (Azure portal) - Portal](https://docs.microsoft.com/en-us/azure/event-grid/blob-event-quickstart-portal)
 * [Manage Azure Storage resources - CLI](https://docs.microsoft.com/en-us/cli/azure/storage?view=azure-cli-latest)
 
 ## Build and push images to AKS
