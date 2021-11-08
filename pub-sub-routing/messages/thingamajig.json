@@ -1,8 +1,0 @@
-{
-  "type": "thingamajig",
-  "source": "routing-demo", 
-  "data": {
-      "description": "Hello, Thingamajig!",
-      "price": 5.00
-  }
-}

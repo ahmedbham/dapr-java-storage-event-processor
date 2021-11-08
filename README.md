@@ -1,82 +1,119 @@
-# Dapr Samples
+## Prerequisites
 
->Note: The Dapr samples have been recently reorganized. Samples that are aimed for newcomers and are meant to help users get started quickly with Dapr have been migrated to a separate repository [dapr/quickstarts](https://github.com/dapr/quickstarts).
+* [Docker](https://docs.docker.com/engine/install/)
+* kubectl
+* Azure CLI
+* Helm3
+* Java JDK11
 
-Samples in this repository showcase [Dapr](https://dapr.io/) capabilities using different languages and address wide array of common scenarios. Some focus on specific usage patterns or particular Dapr capability while others are end-to-end demos leveraging several Dapr building blocks and capabilities.
 
-If you are new to Dapr, you may want to review following resources first:
+## Set up Cluster
 
-* [Getting started with Dapr](https://docs.dapr.io/getting-started/)
-* [Dapr overview](https://docs.dapr.io/concepts/overview/) 
-* [Dapr quickstarts](https://github.com/dapr/quickstarts) - a collection of simple tutorials covering Dapr's main capabilities
+In this sample we'll be using Azure Kubernetes Service, but you can install Dapr on any Kubernetes cluster.
+Run [this script](deploy/deploy_aks.sh) to deploy an AKS cluster 
 
-> Note, these samples are maintained by the Dapr community and are not guaranteed to work properly with the latest Dapr runtime version.
+References:
 
-## Samples in this repository
+* [Deploy AKS using Portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal)
+* [Deploy AKS using CLI](https://docs.dapr.io/operations/hosting/kubernetes/cluster/setup-aks/)
+* [Dapr Environment - Setup Cluster](https://docs.dapr.io/getting-started/install-dapr/#setup-cluster)
 
-| Sample | Details |
-|------|-------|
-| [Twitter Sentiment Processor](./twitter-sentiment-processor) | Code sample used to demo Dapr during Microsoft's Build 2020 conference showing a polyglot distributed application which performs sentiment processing for tweets |
-| [Hello world slim (no Docker dependency)](./hello-dapr-slim) | This sample is a version of the [hello-world](https://github.com/dapr/quickstarts/tree/master/hello-world) quickstart sample showing how to install initialize and use Dapr without having Docker in your local environment |
-| [Hello TypeScript](./hello-typescript) | This sample is a version of the [hello-world](https://github.com/dapr/quickstarts/tree/master/hello-world) quickstart sample showing how to use Dapr in a TypeScript project. |
-| [Docker compose sample](./hello-docker-compose) | Demonstrates how to get Dapr running locally with Docker Compose |
-| [Dapr, Azure Functions, and KEDA](./functions-and-keda) | Shows Dapr being used with Azure Functions and KEDA to create a polygot Functions-as-a-Service application which leverages Dapr pub/sub |
-| [OAuth Authorization to external service](./middleware-clientcredentials) | Demonstrates how to inject a service principal OAuth Bearer Token within a Dapr service-to-service invocation to call secured APIs |
-| [Read Kubernetes Events](./read-kubernetes-events) | Shows Dapr being used with the Kubernetes Input binding to watch for events in Kubernetes cluster |
-| [Batch File Processing](./batch-file-processing) | This sample demonstrates an end-to-end sample for processing a batch of related text files using microservices and Dapr. Through this sample you will learn about Dapr's state management, bindings, Pub/Sub, and end-to-end tracing. |
-| [Dapr integration in Azure APIM](./dapr-apim-integration) | Dapr configuration in Azure API Management service using self-hosted gateway on Kubernetes. Illustrates exposing Dapr API for service method invocation, publishing content to a Pub/Sub topic, and binding invocation with request content transformation. |
-| [Distributed Calendar](./dapr-distributed-calendar) | Shows use of statestore, pubsub and output binding features of Dapr to roughly create a distributed version of a MVCS architecture application. |
-| [Hello Service Fabric](./hello-service-fabric) | Shows use of statestore, pubsub and service invocation in a Service Fabric environment running the Dapr sidecar as a guest executable. |
-| [Pub-sub routing](./pub-sub-routing) | Demonstrates how to use Dapr to enable pub-sub applications with message routing.  |
+## Install Dapr
 
-## External samples
+Run [this script](scripts/deploy_dapr_aks.sh) to install Dapr on the Kubernetes cluster or follow the steps below.
 
-| Sample | Details |
-|------|-------|
-| [Dapr RetroPOS](https://github.com/robece/dapr-retropos) | Dapr Retro Point of Sales is a sample of backend workflow based on microservices. |
-| [Dapr Traffic Control](https://github.com/edwinvw/dapr-traffic-control) | Simulated traffic-control system with speeding cameras using Dapr pub/sub and service-to-service invocation. |
+```bash
+helm repo add dapr https://dapr.github.io/helm-charts/
+helm repo update
+kubectl create namespace dapr-system
+helm install dapr dapr/dapr --namespace dapr-system
+```
 
-## Sample maintenance
+References:
 
-Each sample includes *README.md* which provides information about the validated versions of Dapr for that sample.
+* [Dapr Environment Setup](https://docs.dapr.io/getting-started/install-dapr/)
+* [Install Dapr on a Kubernetes cluster using Helm](https://docs.dapr.io/getting-started/install-dapr/#install-with-helm-advanced)
 
-If you would like to have a sample updated or better yet, update it yourself to a newer version of Dapr, please see the [contribution guide](./CONTRIBUTING.md) to learn more about opening issues and submitting pull requests to this repository.
+## Create Blob Storage
 
-> Note, over time, for maintainability reasons, some samples may be removed from this repository.
+1. Run [this script](deploy/deploy_storage.sh).
 
-## Sample contribution
+2. create the Kubernetes secret (replace *** with storage account key):
+   ```bash
+     kubectl create secret generic output-queue-secret --from-literal=connectionString=*********
+    ```
+3. Replace <storage_account_name> in [deploy/blob-storage.yaml](deploy/blob-storage.yaml) with your storage account name.
 
-If you want to contribute a sample to this repo, please see the sample [contribution guide](./CONTRIBUTING.md) for details on the PR process.
+4. Create two Storage Account Queues, named "dapr-batch-queue" and "dapr-output-queue" in the same Storage Account.
 
-Samples should follow these high-level guiding principles:
+5. Using Azure Portal, create an "Event" for the Storage Account, with the following settings:
+        a. Name: <Anything>
+        b. System Topic Name: <Anything>
+        c. Event Types: "Blob Created"
+        d. Endpoint Type: "Storage Queues"
+        e. Endpoint: <select 'dapr-batch-queue' you had previously created>
 
-* Sample should have a meaningful name that helps users understand what this sample is about
-* Sample code should be complete (i.e. no major code additions should be needed to make the sample work)
-* Each sample should include a *README.md* file clearly explaining what the sample does and how to run it including prerequisites. This file should also include details on the Dapr core version this sample is compatible with (see below).
-* Highly recommended:
-  * architecture diagrams of the sample application
-  * scripts and automation to allow users to easily run samples which require complex setup and multiple steps to run
+References:
 
-Along with the sample code and README, samples should be listed in this page in the above [samples table](#samples-in-this-repository)
+* [Create a container in Azure Storage - Portal](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
+* [Manage Azure Storage resources - CLI](https://docs.microsoft.com/en-us/cli/azure/storage?view=azure-cli-latest)
 
-Sample info section at the top of the main sample README should follow the following template:
+## Build and push images to AKS
 
-| Attribute | Details |
-|--------|--------|
-| Dapr runtime version | vX.X |
-| Language | [Languages used in the sample code] |
-| Environment | [Environment name] |
+1. Create an Azure Container Registry (ACR) (Lowercase registry name is recommended to avoid warnings):
 
->Note: If you are not sure what Dapr runtime version you are running, use the Dapr CLI command `dapr --version`
+    ```powershell
+    az acr create --resource-group <resource-group-name> --name <acr-name> --sku Basic
+    ```
 
-Example:
+    Take note of loginServer in the output.
 
-| Attribute | Details |
-|--------|--------|
-| Dapr runtime version | v0.7.1 |
-| Language | Go, C# (.NET Core), Node.js |
-| Environment | Local or Kubernetes |
+2. Integrate an existing ACR with existing AKS clusters:
 
-## Code of Conduct
+    ```powershell
+    az aks update -n <cluster-name> -g <resource-group-name> --attach-acr <acr-name>
+    ```
 
-Please refer to our [Dapr Community Code of Conduct](https://github.com/dapr/community/blob/master/CODE-OF-CONDUCT.md)
+3. Change ACR loginServer and name in batch-file-processing/javabatchreceiver/batch-receiver/java-batch-receiver.sh
+
+References:
+[Create a private container registry using the Azure CLI](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli)
+
+## Install Kafka on AKS
+
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+kubectl create ns kafka
+helm install dapr-kafka bitnami/kafka --wait --namespace kafka -f batch-file-processing/deploy/kafka-non-persistence.yaml
+
+## Deploy microservices
+
+1. Deploy Dapr components:
+
+    ```bash
+    kubectl apply -f batch-file-processing/deploy/blob-storage.yaml   
+    kubectl apply -f batch-file-processing/deploy/queue-storage.yaml 
+    kubectl apply -f batch-file-processing/deploy/output-queue.yaml
+    kubectl apply -f batch-file-processing/deploy/messagebus.yaml
+    kubectl apply -f batch-file-processing/deploy/subscriptions.yaml
+    kubectl apply -f batch-file-processing/deploy/kafka-pubsub.yaml
+    ```
+
+2. Deploy Batch Receiver microservice:
+
+    ```bash
+    cd batch-file-processing/javabatchreceiver/batch-receiver
+    ./java-batch-receiver.sh
+    cd ../../../
+    ```
+
+    Check the logs for batch-receiver.
+    ```bash 
+    javabatchreceivername=$(kubectl get po --selector=app=java-batch-receiver -o jsonpath='{.items[*].metadata.name}')
+    kubectl logs $javabatchreceivername -c java-batch-receiver -f
+    ```
+3. Test the application.
+
+    a. Upload a file to 'order' container storage.
+    b. view the log output in java-batch-receiver
+    c. view entry in 'dapr-output-queue'
