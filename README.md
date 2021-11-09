@@ -48,14 +48,10 @@ References:
 
 4. Create two Storage Account Queues, named "dapr-batch-queue" and "dapr-output-queue" in the same Storage Account.
 
-5. Using Azure Portal, create an "Event" for the Storage Account:
+5. Using Azure Portal, create a Event Grid event for the Storage Account:
+   * On the seleted Storage Account Overview page, select `Events`, and then select `+ Event Subscription` as follows: ![Create Event Subscription](images/storage-events-creation.png)
    
-        a. Name: <Anything>
-        b. System Topic Name: <Anything>
-        c. Event Types: "Blob Created"
-        d. Endpoint Type: "Storage Queues"
-        e. Endpoint: <select 'dapr-batch-queue' you had previously created>
-
+   * On the `Create Event Subscription` page, enter the values as follow: ![Create Event Subscription](images/create-event-subscription.png)
 
 References:
 
