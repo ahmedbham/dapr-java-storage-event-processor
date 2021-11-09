@@ -21,19 +21,20 @@ References:
 
 ## Install Dapr
 
-Run [this script](scripts/deploy_dapr_aks.sh) to install Dapr on the Kubernetes cluster or follow the steps below.
+Run [this script](deploy/deploy_dapr_aks.sh) to install Dapr on the Kubernetes cluster using Helm, or follow the steps below.
 
 ```bash
-helm repo add dapr https://dapr.github.io/helm-charts/
-helm repo update
-kubectl create namespace dapr-system
-helm install dapr dapr/dapr --namespace dapr-system
+wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | DAPR_INSTALL_DIR="$HOME/dapr" /bin/bash
+dapr init -k
 ```
+
+[Dapr extension for Azure Kubernetes Service (AKS) (preview)](https://docs.microsoft.com/en-us/azure/aks/dapr) is yet another way to install Dapr on your AKS cluster.
 
 References:
 
-* [Dapr Environment Setup](https://docs.dapr.io/getting-started/install-dapr/)
-* [Install Dapr on a Kubernetes cluster using Helm](https://docs.dapr.io/getting-started/install-dapr/#install-with-helm-advanced)
+* [Install the Dapr CLI](https://docs.dapr.io/getting-started/install-dapr-cli/)
+* [Install Dapr on a Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy)
+* [Dapr extension for Azure Kubernetes Service (AKS) (preview)](https://docs.microsoft.com/en-us/azure/aks/dapr)
 
 ## Create Blob Storage
 
@@ -47,7 +48,8 @@ References:
 
 4. Create two Storage Account Queues, named "dapr-batch-queue" and "dapr-output-queue" in the same Storage Account.
 
-5. Using Azure Portal, create an "Event" for the Storage Account, with the following settings:
+5. Using Azure Portal, create an "Event" for the Storage Account:
+   
         a. Name: <Anything>
         b. System Topic Name: <Anything>
         c. Event Types: "Blob Created"
