@@ -50,9 +50,9 @@ References:
 
 5. Using Azure Portal, create a Event Grid event for the Storage Account:
 
-   * On the seleted Storage Account Overview page, select `Events`, and then select `+ Event Subscription` as follows: ![Create Event Subscription](images/storage-events-creation.png)
+   * On the seleted Storage Account Overview page, select `Events`, and then select `+ Event Subscription` as follows: ![Create Event Subscription](images/create-event-subscription.png)
 
-   * On the `Create Event Subscription` page, enter the values as follow: ![Create Event Subscription](images/create-event-subscription.png)
+   * On the `Create Event Subscription` page, enter the values as follow: ![Create Event Subscription](images/new-event-subscription.png)
 
 References:
 
