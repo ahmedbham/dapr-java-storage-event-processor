@@ -7,6 +7,9 @@
 * Java JDK11
 * Maven
 
+## Architecture
+![image](https://user-images.githubusercontent.com/12716801/142919328-ed3d55c8-a7a3-4d42-9e98-2a42ec7a10f9.png)
+
 
 ## Set up Cluster
 
