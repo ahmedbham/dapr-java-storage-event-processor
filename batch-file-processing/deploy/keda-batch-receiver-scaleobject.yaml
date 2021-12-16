@@ -2,16 +2,16 @@ apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
   name: http-scaledobject
-  namespace: keda
+  namespace: custom-metric
   labels:
     deploymentName: java-batch-receiver-scaler
 spec:
-  maxReplicaCount: 5
+  maxReplicaCount: 10
   scaleTargetRef:
-    name: custom-metric.php-apache
+    name: php-apache
   triggers:
     - type: metrics-api
       metadata:
-        targetValue: "1"
-        url: "http://java-batch-receiver:8084/api/blobstats"
+        targetValue: "2"
+        url: "http://java-batch-receiver-service:8084/api/blobstats"
         valueLocation: 'tasks'
