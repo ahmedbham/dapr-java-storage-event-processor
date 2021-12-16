@@ -26,3 +26,24 @@ spec:
         ports:
         - containerPort: 8084
         imagePullPolicy: Always
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: java-batch-receiver-service
+  labels:
+    app: java-batch-receiver
+spec:
+  selector:
+    app: java-batch-receiver
+  ports:
+    - name: java-batch-receiver
+      protocol: TCP
+      port: 8084
+      targetPort: 8084
+  type: ClusterIP
+
+
+
+

@@ -1,0 +1,17 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: http-scaledobject
+  namespace: keda
+  labels:
+    deploymentName: java-batch-receiver-scaler
+spec:
+  maxReplicaCount: 5
+  scaleTargetRef:
+    name: java-batch-receiver
+  triggers:
+    - type: metrics-api
+      metadata:
+        targetValue: "1"
+        url: "http://java-batch-receiver:8084/api/blobstats"
+        valueLocation: 'tasks'
