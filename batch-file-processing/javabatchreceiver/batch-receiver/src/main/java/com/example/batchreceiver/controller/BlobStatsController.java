@@ -21,7 +21,7 @@ class Stats
 public class BlobStatsController {
 
   static final String BINDING_NAME = "dapr-output-queue";
-  static final String connectStr = "DefaultEndpointsProtocol=https;AccountName=dapr1batch;AccountKey=ZSDksBXW3ObRXqDKdmH/JqRno9Gw7Y9IRPgTmKvCyBWozvbD/mNQxE1jKcM96ya81oAB+G/43BGbdlSZ4QPdbg==;";
+  static final String connectStr = "";
   // EndpointSuffix=core.windows.net";
 
   @GetMapping("/api/blobstats")
