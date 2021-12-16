@@ -17,3 +17,6 @@ docker tag batch-receiver:0.0.1-SNAPSHOT $acrLoginServer/java-batch-receiver:v1
 
 # Push the image to the Azure Container Registry instance
 docker push $acrLoginServer/java-batch-receiver:v1
+
+# Deploy to AKS cluster
+kubectl apply -f ../../deploy/java-batch-receiver.yaml

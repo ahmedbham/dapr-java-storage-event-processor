@@ -10,27 +10,22 @@ import static java.util.Collections.singletonMap;
 
 @Service
 public class PublishToJava {
-  // Time-to-live for messages published.
-  private static final String MESSAGE_TTL_IN_SECONDS = "1000";
 
-  // The title of the topic to be used for publishing
-  private static final String TOPIC_NAME = "testingtopic";
+  static final String BINDING_NAME = "outputqueue";
 
-  // The name of the pubsub
-  private static final String PUBSUB_NAME = "messagebus";
+  static final String BINDING_OPERATION = "create";
 
-  public void produce(String message) {
+  public void produce(Long contentLength) {
     try {
       DaprClient client = new DaprClientBuilder().build();
-      client
-          .publishEvent(PUBSUB_NAME, TOPIC_NAME, message, singletonMap(Metadata.TTL_IN_SECONDS, MESSAGE_TTL_IN_SECONDS))
-          .block();
 
+      client.invokeBinding(BINDING_NAME, BINDING_OPERATION, contentLength).block();
       client.close();
+
     } catch (Exception e) {
       e.printStackTrace();
     }
-    System.out.println("Published message: " + message);
+    System.out.println("Published message: " + contentLength);
   }
 
 }

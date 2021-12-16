@@ -53,13 +53,14 @@ public class BatchReceiverController {
             StorageBlobCreatedEventData blobCreatedData = eventData.toObject(StorageBlobCreatedEventData.class);
             System.out.println("blob created url : " + blobCreatedData.getUrl());
             System.out.println("blob created url : " + blobCreatedData.getContentLength());
-            publishToJava.produce(blobCreatedData.getUrl());
+            publishToJava.produce(blobCreatedData.getContentLength());
             break;
           case storageBlobDeletedEvent:
 
             StorageBlobDeletedEventData blobDeletedData = eventData.toObject(StorageBlobDeletedEventData.class);
             System.out.println("blob deleted url : " + blobDeletedData.getUrl());
-            publishToJava.produce(blobDeletedData.getUrl());
+            // System.out.println("blob created url : " + blobDeletedData.getContentLength());
+            // publishToJava.produce(blobDeletedData.getContentLength());
             break;
           default:
             System.out.printf("%s isn't an AppConfiguration event data%n", event.getEventType());
