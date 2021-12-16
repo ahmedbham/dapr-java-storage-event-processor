@@ -8,7 +8,7 @@ metadata:
 spec:
   maxReplicaCount: 5
   scaleTargetRef:
-    name: java-batch-receiver
+    name: custom-metric.php-apache
   triggers:
     - type: metrics-api
       metadata:
