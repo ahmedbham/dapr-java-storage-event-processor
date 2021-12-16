@@ -66,7 +66,7 @@
 		<dependency>
 			<groupId>com.azure</groupId>
 			<artifactId>azure-storage-queue</artifactId>
-			<version>12.10.0</version>
+			<version>12.11.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<!-- <dependency>
@@ -93,5 +93,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
