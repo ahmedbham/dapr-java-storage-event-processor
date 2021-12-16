@@ -52,6 +52,7 @@ public class BatchReceiverController {
 
             StorageBlobCreatedEventData blobCreatedData = eventData.toObject(StorageBlobCreatedEventData.class);
             System.out.println("blob created url : " + blobCreatedData.getUrl());
+            System.out.println("blob created url : " + blobCreatedData.getContentLength());
             publishToJava.produce(blobCreatedData.getUrl());
             break;
           case storageBlobDeletedEvent:

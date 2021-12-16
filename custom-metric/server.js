@@ -19,7 +19,7 @@ app.get('/update', (req, res) => {
     })
 })
 
-app.get('/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/my-metrics-exporter/instance', (req, res) => {
+app.get('/apis/custom.metrics.k8s.io/v1beta1/namespaces/custom-metric/services/my-metrics-exporter/instance', (req, res) => {
     res.send({
         kind: "MetricValueList",
         apiVersion: "custom.metrics.k8s.io/v1beta1",

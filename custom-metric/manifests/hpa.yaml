@@ -1,12 +1,12 @@
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: aggregator-hpa
+  name: php-apache-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: aggregator
+    name: php-apache
   minReplicas: 1
   maxReplicas: 10
   behavior:
@@ -25,6 +25,7 @@ spec:
         apiVersion: /v1beta1
         kind: Service
         name: my-metrics-exporter
+        namespace: custom-metric
       target:
         type: Value
         value: 5
