@@ -19,4 +19,6 @@ docker tag batch-receiver:0.0.1-SNAPSHOT $acrLoginServer/java-batch-receiver:v1
 docker push $acrLoginServer/java-batch-receiver:v1
 
 # Deploy to AKS cluster
+kubectl delete -f ../../deploy/java-batch-receiver.yaml
+sleep 10
 kubectl apply -f ../../deploy/java-batch-receiver.yaml
