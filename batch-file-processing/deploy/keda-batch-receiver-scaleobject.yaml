@@ -13,5 +13,5 @@ spec:
     - type: metrics-api
       metadata:
         targetValue: "2"
-        url: "http://java-batch-receiver-service:8084/api/blobstats"
+        url: "http://10.0.185.233:8084/api/blobstats"
         valueLocation: 'tasks'
