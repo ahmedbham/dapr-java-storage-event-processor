@@ -40,7 +40,7 @@ spec:
   ports:
     - name: java-batch-receiver
       protocol: TCP
-      port: 8084
+      port: 80
       targetPort: 8084
   type: ClusterIP
 

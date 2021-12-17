@@ -43,6 +43,7 @@ References:
 2. create the Kubernetes secret (replace *** with storage account key):
    ```bash
      kubectl create secret generic output-queue-secret --from-literal=connectionString=*********
+     kubectl create secret generic output-queue-secret --from-literal=connectionString=cri0BZd4CXMBBLqLmFcGXuGd9GpGOPnkJr2CfDhqNzPLDeOrcfXjOa/HbDfafLqXWIrlISIJL7WcSY6w9LfptA==
     ```
 3. Replace <storage_account_name> in [deploy/blob-storage.yaml](deploy/blob-storage.yaml) with your storage account name.
 
@@ -118,3 +119,13 @@ helm install dapr-kafka bitnami/kafka --wait --namespace kafka -f batch-file-pro
     a. Upload a file to 'order' container storage.
     b. view the log output in java-batch-receiver
     c. view entry in 'dapr-output-queue'
+
+    k port-forward svc/java-batch-receiver-service 8084:80
+    k port-forward deploy/java-batch-receiver 8084:8084
+kubectl delete scaledobject http-scaledobject -n custom-metric
+kubectl describe scaledobject http-scaledobject -n custom-metric
+
+kubectl apply -f  batch-file-processing/deploy/keda-batch-receiver-scaleobject.yaml
+
+k delete -f batch-file-processing/php-apache/php-apache.yaml
+k apply -f batch-file-processing/php-apache/php-apache.yaml

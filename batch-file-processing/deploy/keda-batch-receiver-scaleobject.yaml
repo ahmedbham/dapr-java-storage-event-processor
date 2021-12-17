@@ -2,7 +2,7 @@ apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
   name: http-scaledobject
-  namespace: custom-metric
+  # namespace: custom-metric
   labels:
     deploymentName: java-batch-receiver-scaler
 spec:
@@ -13,5 +13,5 @@ spec:
     - type: metrics-api
       metadata:
         targetValue: "2"
-        url: "http://10.0.185.233:8084/api/blobstats"
-        valueLocation: 'tasks'
+        url: "http://java-batch-receiver-service"
+        valueLocation: "tasks"
