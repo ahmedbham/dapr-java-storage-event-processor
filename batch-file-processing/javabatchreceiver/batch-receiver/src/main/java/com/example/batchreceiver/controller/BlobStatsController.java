@@ -31,13 +31,9 @@ class Stats
 public class BlobStatsController {
 
   static final String BINDING_NAME = "dapr-output-queue";
-<<<<<<< HEAD
+
   static final String connectStr = "";
-=======
-  // static final String  endpoint = "https://dapr1batch.queue.core.windows.net/?sv=2020-08-04&ss=q&srt=sco&sp=rlp&se=2021-12-20T11:58:40Z&st=2021-12-17T03:58:40Z&spr=https&sig=NU2iNcLCsck0A3AZ2Sedey8TiBX22XR3wBdUjDa652s%3D";  
-  static final String connectStr = "DefaultEndpointsProtocol=https;AccountName=dapr1batch;AccountKey=cri0BZd4CXMBBLqLmFcGXuGd9GpGOPnkJr2CfDhqNzPLDeOrcfXjOa/HbDfafLqXWIrlISIJL7WcSY6w9LfptA==;EndpointSuffix=core.windows.net";
->>>>>>> f501368 (fixed blobstat code)
-  // EndpointSuffix=core.windows.net";
+
 
   @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
   public Stats getBlobStats() {
@@ -87,37 +83,4 @@ public class BlobStatsController {
     return stats;
   }
 
-  //   String filesize = "";
-  //   Stats stats = new Stats();
-    
-  //   try
-  //   {
-  //       // Instantiate a QueueClient which will be
-  //       // used to create and manipulate the queue
-  //       QueueClient queueClient = new QueueClientBuilder()
-  //                                   .connectionString(connectStr)
-  //                                   .queueName(BINDING_NAME)
-  //                                   .buildClient();
-
-  //      // Get the first queue message
-  //      QueueMessageItem message = queueClient.receiveMessage();
-       
-
-  //      if (null != message)
-  //      {
-  //          System.out.println("Message retrieved: " + message);
-           
-  //          StorageBlobCreatedEventData blobCreatedData = message.getBody().toObject(StorageBlobCreatedEventData.class);
-  //          filesize = blobCreatedData.getContentLength().toString();
-  //          stats.tasks = Integer.valueOf(filesize);          
-  //      }       
-  //   }
-  //   catch (QueueStorageException e)
-  //   {
-  //       // Output the exception message and stack trace
-  //       System.out.println(e.getMessage());
-  //       e.printStackTrace();
-  //   }
-  //   return new ResponseEntity<>(stats, HttpStatus.OK); 
-  // }
 }
