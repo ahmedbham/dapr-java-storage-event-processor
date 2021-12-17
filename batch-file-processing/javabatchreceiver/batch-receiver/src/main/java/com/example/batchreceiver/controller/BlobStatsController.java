@@ -54,11 +54,7 @@ public class BlobStatsController {
                                     .queueName(BINDING_NAME)
                                     .buildClient();
 
-    //     QueueClient client = new QueueClientBuilder()
-    //  .endpoint("https://${accountName}.queue.core.windows.net")
-    //  .queueName("myqueue")
-    //  .sasToken("{SASTokenQueryParams}")
-    //  .buildClient();                           
+               
 
         // Get the first queue message
         QueueMessageItem message = queueClient.receiveMessage();
